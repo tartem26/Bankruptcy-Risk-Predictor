@@ -66,3 +66,16 @@ Install the required packages:
 - **No leakage:** scaler fit on train only and applied to test after split.
 - **Imbalance caution:** Logistic Regression on imbalanced data can look "good" in terms of accuracy, but it can fail on the minority class—use a confusion matrix and a Receiver Operating Characteristic (ROC) curve, which show TPR (recall) vs. FPR across all classification thresholds; this demonstrates the trade-off between catching positives and triggering false alarms.
 - **Plots:** The script generates histograms, box plots, violin plots, correlation heatmaps, confusion matrix heatmaps, and ROC curves for each model.
+
+
+## Conclusion
+Log normalization, IQR (Interquartile Range) outlier clipping, and z-score scaling produced the most stable feature distributions. Undersampling was the most reliable class-imbalance fix among those tried (vs. SMOTE/SMOTEENN), improving minority detection but lowering overall accuracy. Regarding the models trained, Logistic Regression underperformed on the balanced data (≈57% test accuracy; ROC-AUC ≈0.64), indicating that linear models were insufficient. Ensemble tree methods (Random Forest, XGBoost) are recommended primary models given the dataset's non-linear structure and prior evidence.
+
+| Aspect                    | What Worked / Finding                                                                             |
+|---------------------------|---------------------------------------------------------------------------------------------------|
+| Normalization             | Log normalization chosen as best distributional transform                                         |
+| Outliers                  | IQR clipping ```(Q1 − 1.5 · IQR, Q3 + 1.5 · IQR)``` stabilized features                           |
+| Scaling & Leakage Control | z-score scaling after ```80/20``` split; fit stats on train only to avoid leakage                 |
+| Sampling                  | Undersampling most effective vs. SMOTE/SMOTEENN; improved minority class at cost of ```0```       |
+| Logistic Regression       | ```≈57%``` test accuracy (balanced set), ROC-AUC ```≈0.64```; minority improved but still limited |
+| Best Models               | Tree ensembles (Random Forest/XGBoost) indicated as better suited for this task                   |
