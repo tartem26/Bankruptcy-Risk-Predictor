@@ -69,7 +69,7 @@ Install the required packages:
 
 
 ## Conclusion
-Log normalization, IQR (Interquartile Range) outlier clipping, and z-score scaling produced the most stable feature distributions. Undersampling was the most reliable class-imbalance fix among those tried (vs. SMOTE/SMOTEENN), improving minority detection but lowering overall accuracy. Regarding the models trained, Logistic Regression underperformed on the balanced data (≈57% test accuracy; ROC-AUC ≈0.64), indicating that linear models were insufficient. Ensemble tree methods (Random Forest, XGBoost) are recommended primary models given the dataset's non-linear structure and prior evidence.
+Log normalization, IQR (Interquartile Range) outlier clipping, and z-score scaling produced the most stable feature distributions. Undersampling was the most reliable class-imbalance fix among those tried (vs. SMOTE/SMOTEENN), improving minority detection but lowering overall accuracy. Regarding the models trained, Logistic Regression underperformed on the balanced data (```≈57%``` test accuracy; ROC-AUC ```≈0.64```), indicating that linear models were insufficient. Ensemble tree methods (Random Forest, XGBoost) are recommended primary models given the dataset's non-linear structure and prior evidence.
 
 | Aspect                    | What Worked / Finding                                                                             |
 |---------------------------|---------------------------------------------------------------------------------------------------|
