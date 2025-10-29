@@ -47,6 +47,21 @@ Install the required packages:
 ```
 
 
+## How to Run
+1. Open the Jupyter notebook or script and execute the cells sequentially from top to bottom.
+2. Place the ```american_bankruptcy.csv``` file in the working directory.
+3. The code will:
+   - Try Square/Inverse/Log normalization (plots shown), then apply Log normalization.
+   - Clip outliers (IQR), drop highly correlated features (```|r| > 0.85```).
+   - Split ```80/20```, scale with StandardScaler (train stats only).
+   - Train/evaluate:
+     - Random Forest (undersampled)
+     - Logistic Regression (undersampled + GridSearchCV)
+     - XGBoost (SMOTEENN + GridSearchCV).
+   - Produce plots (box/violin, heatmaps, ROC) and save ```col_averages.pkl```, ```scaler.pkl``, ```best_model.pkl```.
+   > If you want to switch sampling strategy per model, uncomment the corresponding blocks (SMOTE/SMOTEENN or undersample) and pass the matching arrays to the chosen estimator.
+
+
 ## Notes
 - **No leakage:** scaler fit on train only and applied to test after split.
 - **Imbalance caution:** Logistic Regression on imbalanced data can look "good" in terms of accuracy, but it can fail on the minority class—use a confusion matrix and a Receiver Operating Characteristic (ROC) curve, which show TPR (recall) vs. FPR across all classification thresholds; this demonstrates the trade-off between catching positives and triggering false alarms.
